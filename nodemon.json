@@ -2,9 +2,9 @@
     "watch": [
         "src/app"
     ],
-    "ext": "ts,json",
+    "ext": "js,json",
     "ignore": [
-        "src/**/*.spec.ts"
+        "src/**/*.spec.js"
     ],
-    "exec": "ts-node --files ./src/index.ts"
+    "exec": "node ./src/index.js"
 }

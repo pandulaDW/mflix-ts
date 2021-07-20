@@ -1,16 +1,17 @@
-import app from "./server";
-import dotenv from "dotenv";
-import { MongoClient } from "mongodb";
+const app = require("./server");
+const dotenv = require("dotenv");
+const { MongoClient } = require("mongodb");
 
 // setup the necessary environment variables
 dotenv.config();
 
 const port = process.env.PORT || 8000;
-const dbUri = process.env.MFLIX_DB_URI as string;
+const dbUri = process.env.MFLIX_DB_URI;
 
 const mongoClient = new MongoClient(dbUri, {
   connectTimeoutMS: 2000,
   retryWrites: true,
+  useNewUrlParser: true,
 });
 
 mongoClient.connect(function (err, client) {

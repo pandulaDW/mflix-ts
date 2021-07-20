@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -15,4 +15,4 @@ app.get("/", (_, res) => {
   res.status(200).json({ message: "Hello" });
 });
 
-export default app;
+module.exports = app;
