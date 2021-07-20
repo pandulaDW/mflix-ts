@@ -8,7 +8,10 @@ dotenv.config();
 const port = process.env.PORT || 8000;
 const dbUri = process.env.MFLIX_DB_URI as string;
 
-const mongoClient = new MongoClient(dbUri);
+const mongoClient = new MongoClient(dbUri, {
+  connectTimeoutMS: 2000,
+  retryWrites: true,
+});
 
 mongoClient.connect(function (err, client) {
   if (err) {
