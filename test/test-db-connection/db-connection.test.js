@@ -1,6 +1,10 @@
 const MoviesDAO = require("../../src/dao/moviesDAO");
 
 describe("db connection", () => {
+  beforeAll(() => {
+    MoviesDAO.injectDB(global.mflixClient);
+  });
+
   test("can access mflix data", async () => {
     const mflix = global.mflixClient.db(process.env.MFLIX_NS);
     const collections = await mflix.listCollections().toArray();
