@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+const moviesRouter = require("./routers/moviesRouter");
 
 const app = express();
 
@@ -10,9 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-// register api routers
-app.get("/", (_, res) => {
-  res.status(200).json({ message: "Hello" });
-});
+// register api routes
+app.use("/api/v1/movies", moviesRouter);
 
 module.exports = app;

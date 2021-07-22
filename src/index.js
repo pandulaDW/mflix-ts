@@ -1,6 +1,7 @@
 const app = require("./server");
 const dotenv = require("dotenv");
 const { MongoClient } = require("mongodb");
+const MoviesDAO = require("./dao/moviesDAO");
 
 // setup the necessary environment variables
 dotenv.config();
@@ -22,6 +23,7 @@ mongoClient.connect(function (err, client) {
 
   if (client) {
     console.log("DB connection successful");
+    MoviesDAO.injectDB(client);
     app.listen(port, () => {
       console.log(`server started listening at port ${port}...`);
     });

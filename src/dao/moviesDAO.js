@@ -10,7 +10,7 @@ let mflix;
 // default sort order
 const DEFAULT_SORT = [["tomatoes.viewer.numReviews", -1]];
 
-module.exports = class MoviesDAO {
+class MoviesDAO {
   /**
    * set the movies variable with movies collection object
    * @param {MongoClient} conn
@@ -126,7 +126,9 @@ module.exports = class MoviesDAO {
       return { moviesList: [], totalNumMovies: 0 };
     }
   }
-};
+}
+
+module.exports = MoviesDAO;
 
 // type defs -----------------------------------
 /**
