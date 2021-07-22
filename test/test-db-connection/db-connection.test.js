@@ -14,9 +14,15 @@ describe("db connection", () => {
     expect(collectionNames).toContain("users");
   });
 
-  test("Can retrieve a movie by id", async () => {
+  test("can retrieve a movie by id", async () => {
     const id = "573a13a6f29313caabd17bd5";
     const movie = await MoviesDAO.getMovieByID(id);
     expect(movie.title).toEqual("Once Upon a Time in Mexico");
+  });
+
+  test("can retrieve first page of movies", async () => {
+    const { moviesList, totalNumMovies } = await MoviesDAO.getMovies();
+    expect(moviesList.length).toEqual(20);
+    expect(totalNumMovies).toEqual(23530);
   });
 });
