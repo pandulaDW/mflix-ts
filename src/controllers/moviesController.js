@@ -14,6 +14,12 @@ class MoviesController {
 
     res.json(response);
   }
+
+  static async apiGetMoviesByCountry(req, res) {
+    let countries = req.query.countries === "" ? "USA" : req.query.countries;
+    let countryList = Array.isArray(countries) ? countries : Array(countries);
+    let moviesList = await MoviesDAO();
+  }
 }
 
 module.exports = MoviesController;

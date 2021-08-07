@@ -126,6 +126,17 @@ class MoviesDAO {
       return { moviesList: [], totalNumMovies: 0 };
     }
   }
+
+  static async getMoviesByCountry() {
+    let cursor;
+
+    try {
+      cursor = await movies.find().limit(1);
+    } catch (e) {
+      console.error(`unable to find command, ${e}`);
+      return [];
+    }
+  }
 }
 
 module.exports = MoviesDAO;
