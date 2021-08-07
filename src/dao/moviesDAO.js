@@ -127,11 +127,21 @@ class MoviesDAO {
     }
   }
 
-  static async getMoviesByCountry() {
-    let cursor;
-
+  static async getMoviesByCountry(countries) {
     try {
-      cursor = await movies.find().limit(1);
+      const cursor = await movies.find(
+        { countries: { $in: countries } },
+        { projection: { title: 1 } }
+      );
+
+      const results = [];
+
+      while (await cursor.hasNext()) {
+        const item = await cursor.next();
+        results.push(item);
+      }
+
+      return results;
     } catch (e) {
       console.error(`unable to find command, ${e}`);
       return [];
