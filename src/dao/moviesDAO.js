@@ -62,7 +62,7 @@ class MoviesDAO {
    */
   static genreSearchQuery(genre) {
     const searchGenre = Array.isArray(genre) ? genre : genre.split(", ");
-    const query = { genre: { $in: searchGenre } };
+    const query = { genres: { $in: searchGenre } };
     const project = {};
     const sort = DEFAULT_SORT;
     return { query, project, sort };
@@ -96,7 +96,8 @@ class MoviesDAO {
   } = {}) {
     let queryParams = {};
     if (filters) {
-      if ("text" in filters) queryParams = this.textSearch(filters["text"]);
+      if ("text" in filters)
+        queryParams = this.textSearchQuery(filters["text"]);
       else if ("cast" in filters)
         queryParams = this.castSearchQuery(filters["cast"]);
       else if ("genre" in filters)
@@ -117,7 +118,7 @@ class MoviesDAO {
 
     try {
       const moviesList = await displayCursor.toArray();
-      const totalNumMovies = page === 0 ? await movies.count() : 0;
+      const totalNumMovies = await cursor.count();
       return { moviesList, totalNumMovies };
     } catch (e) {
       console.error(
